@@ -1,0 +1,91 @@
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin-top:0px;
+}
+.card {
+  margin-bottom: 50px;
+}
+.breadcrumb-item {
+  font-size: 0.8em !important;
+}
+.ellipsis{
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.searchbar{
+  margin-top:10px;
+}
+
+.board-table {
+  table-layout: fixed;
+}
+
+.board-table .title{
+  text-align: center;
+}
+.board-table .numId,
+.board-table .views{
+  width: 60px;
+  text-align: center;
+  vertical-align: middle;
+}
+.board-table .author,
+.board-table .category{
+  width: 100px;
+  vertical-align: middle;
+  text-align: center;
+}
+.board-table .date {
+  width: 150px;
+  vertical-align: middle;
+  text-align: center;
+}
+.board-table .title-container:hover .title-comments,
+.board-table .title-container:hover .title-text
+{
+  word-break: break-all;
+  white-space: pre-line;
+  vertical-align: middle;
+  text-decoration: underline;
+}
+
+.post-body,
+
+.comment-text {
+  word-break: break-all;
+  white-space: pre-line;
+}
+.post-info{
+  font-size: 0.8em;
+}
+
+.user-form {
+  width: 400px;
+}
+
+.post-index-tool {
+  max-width: 450px;
+}
+.post-index-tool input[type='text']{
+  max-width: 130px;
+}
+
+.highlighted {
+  background-color: yellow;
+}
+
+.comment-edit,
+.comment-reply,
+.comment-edit-enabled .comment-show {
+  display:none;
+}
+
+.comment-edit-enabled .comment-edit,
+.comment-reply-enabled .comment-reply {
+  display:inherit;
+}
+
