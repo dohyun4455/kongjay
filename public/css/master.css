@@ -6,6 +6,7 @@ img {
 body {
   font-family: 'Open Sans', sans-serif;
   margin-top:0px;
+  background-color: #FCE0E5;
 }
 .card {
   margin-top: 20px;
@@ -34,6 +35,12 @@ body {
 
 .board-table {
   table-layout: fixed;
+}
+.btn-info {
+  background-color: #FFB7C5;
+}
+.btn-info {
+  background-color: #FFB7C5;
 }
 
 .board-table .title{

@@ -38,8 +38,8 @@
         <% } %>
 
         <div>
-          <a class="btn btn-secondary" href="/posts<%= getPostQueryString() %>">뒤로가기</a>
-          <button type="submit" class="btn btn-secondary">작성 완료</button>
+          <a class="btn btn-info" href="/posts<%= getPostQueryString() %>">뒤로가기</a>
+          <button type="submit" class="btn btn-info">작성 완료</button>
         </div>
 
       </form>
@@ -112,7 +112,7 @@
                 context.invoke('editor.pasteHTML', '\
                 <div class="card">\
   <div class="card-header">\
-    <span class="badge badge-secondary float-right" data-clipboard-target="#copied">Copyit</span>\
+    <span class="badge badge-info float-right" data-clipboard-target="#copied">Copyit</span>\
     </div>\
   <div class="card-body" id="copied">\
     <div class="card-text">\

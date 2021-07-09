@@ -3,7 +3,7 @@
   <head>
     <%- include('../partials/head') %>
   </head>
-  <body>
+  <body style="background-color:unset;">
     <%- include('../partials/nav') %>
 
     <div class="searchbar container mb-3">
@@ -11,7 +11,7 @@
         <div class="form-row">
 
           <div class="form-group col-3">
-            <select name="limit" class="custom-select" onchange="this.parentElement.parentElement.parentElement.submit()">
+            <select name="limit" class="custom-select" style="color:#B97BE3;" onchange="this.parentElement.parentElement.parentElement.submit()">
               <option value="5" <%= limit==5?'selected':'' %>>5 posts</option>
               <option value="10" <%= limit==10?'selected':'' %>>10 posts</option>
               <option value="20" <%= limit==20?'selected':'' %>>20 posts</option>
@@ -20,7 +20,7 @@
 
           <div class="form-group col-9">
             <div class="input-group">
-              <select name="searchType" class="custom-select">
+              <select name="searchType" class="custom-select" style="color:#B97BE3;">
                 <option value="title,body" <%= searchType=='title,body'?'selected':'' %>>제목+내용</option>
                 <option value="title" <%= searchType=='title'?'selected':'' %>>제목</option>
                 <option value="body" <%= searchType=='body'?'selected':'' %>>내용</option>
@@ -29,16 +29,16 @@
               </select>
               <input minLength="3" type="text" name="searchText" value="<%= searchText %>">
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">Search</button>
+                <button class="btn btn-info" type="submit">Search</button>
               </div>
             </div>
           </div>
 
         </div>
       </form>
-      <table class="board-table table table-dark table-bordered border-bottom">
+      <table class="board-table table table-light table-bordered border-bottom" style="background-color: #FCE0E5;">
 
-        <thead class="thead-light">
+        <thead class="thead" style="background-color: #FFB7C5; color:white;">
           <tr>
             <th scope="col" class="category">Category</th>
             <th scope="col" class="title">Title</th>
@@ -56,21 +56,21 @@
             <tr>
               <td class="category">
                 <a href="/posts<%= getPostQueryString(false, { searchType:'category', searchText:post.category }) %>">
-                  <div data-search-highlight="category" class="ellipsis"><%= post.category %></div>
+                  <div data-search-highlight="category" class="ellipsis" style="font-weight: bolder; font-family:'Malgun Gothic'; color:#B97BE3;"><%= post.category %></div>
                 </a>
               </td>
               <td>
                 <a href="/posts/<%= post._id %><%= getPostQueryString() %>" class="title-container">
                   <div data-search-highlight="title" class="title-ellipsis ellipsis float-left">
-                    <span class="title-text"><%= post.title %></span>
+                    <span class="title-text" style="font-weight: bolder; font-family:'Malgun Gothic'; color:#B97BE3;"><%= post.title %></span>
                   </div>
                   <% if(post.commentCount){ %>
-                    <small class="title-comments d-inline-block pl-2">(Reply : <%= post.commentCount %>)</small>
+                    <small class="title-comments d-inline-block pl-2" style="color:#B97BE3;">(Reply : <%= post.commentCount %>)</small>
                   <% } %>
                 </a>
               </td>
               <td class="date">
-                <span data-date="<%= post.createdAt %>"></span>
+                <span data-date="<%= post.createdAt %>" style="font-weight: bolder; font-family:'Malgun Gothic'; color:#B97BE3;"></span>
               </td>
             </tr>
           <% }) %>
@@ -82,7 +82,7 @@
 
         <div class="col-2">
           <% if(isAdminLoggedin){ %>
-            <a class="btn btn-secondary" href="/posts/new<%= getPostQueryString() %>">New</a>
+            <a class="btn btn-info" href="/posts/new<%= getPostQueryString() %>">New</a>
           <% } %>
         </div>
 

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('../config/passport');
 var multer = require('multer');
+var path = require('path');
 
 
 // Multer Setting
@@ -10,13 +11,13 @@ var storage = multer.diskStorage({
     cb(null, './public/uploads') // cb 콜백함수를 통해 전송된 파일 저장 디렉토리 설정
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname) // cb 콜백함수를 통해 전송된 파일 이름 설정
+    cb(null, new Date().valueOf() + path.extname(file.originalname)) // cb 콜백함수를 통해 전송된 파일 이름 설정
   }
 })
 var upload = multer({ storage: storage })
 router.post('/imageUpload', upload.any(), function(req, res){
-  //res.send({'url': 'https://kongjay.com/uploads/'+req.files[0].filename});
-  res.send({'url': 'http://localhost/uploads/'+req.files[0].filename});
+  res.send({'url': 'https://kongjay.com/uploads/'+req.files[0].filename});
+  //res.send({'url': 'http://localhost/uploads/'+req.files[0].filename});
 });
 
 // Home
