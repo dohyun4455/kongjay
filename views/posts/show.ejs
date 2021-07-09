@@ -9,24 +9,21 @@
     <div class="container mb-3">
 
       <div class="card">
-        <h2 class="card-header p-2" data-search-highlight="title">[<%= post.category %>] <%= post.title %></h2>
-        <div class="row">
-
-          <div class="col-md-7 col-lg-8 col-xl-9 order-sm-2 order-md-1">
-            <div class="post-body p-2" data-search-highlight="body" ><%- post.body %></div>
-          </div>
-
-          <div class="col-md-5 col-lg-4 col-xl-3 order-sm-1 order-md-2">
-            <div class="post-info card m-2 p-2">
-              
-              <div><span>Created</span> : <span data-date-time="<%= post.createdAt %>"></span></div>
-              <% if(post.updatedAt) { %>
-                <div><span>Updated</span> : <span data-date-time="<%= post.updatedAt %>"></span></div>
-              <% } %>
+        <div class="row no-gutters">
+          
+          <h2 class="card-title col-md-7 col-lg-8 col-xl-9 order-sm-2 order-md-1" style="padding-left: 25px; font-weight: bolder; font-family:'Malgun Gothic';" data-search-highlight="title"><%= post.title %></h2>
+            <div class="col-md-5 col-lg-4 col-xl-3 order-sm-1 order-md-2">
+              <div class="post-info card m-2 p-2">
+                <div><span>Created</span> : <span data-date-time="<%= post.createdAt %>"></span></div>
+                <% if(post.updatedAt) { %>
+                  <div><span>Updated</span> : <span data-date-time="<%= post.updatedAt %>"></span></div>
+                <% } %>
+              </div>
             </div>
-          </div>
-
         </div>
+        <div class="border-bottom pb-1 mb-1"></div>
+        <div class="card-header"><div style="float: right;"><h4>#Category : <span class="badge badge-secondary"><%- post.category %></span></h4> </div></div>
+        <div class="post-body p-4" data-search-highlight="body" ><%- post.body %></div>
       </div>
 
       <div class="mt-3">

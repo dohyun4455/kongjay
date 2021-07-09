@@ -24,7 +24,6 @@
         </div>
 
         <div class="form-group">
-          <label for="body">Body</label>
           <textarea id="summernote" name="body" rows="5" class="form-control <%= (errors.body)?'is-invalid':'' %>"><%= post.body %></textarea>
           <% if(errors.body){ %>
             <span class="invalid-feedback"><%= errors.body.message %></span>
@@ -48,26 +47,91 @@
         $(document).ready(function() {
 	//여기 아래 부분
           $('#summernote').summernote({
+              tabDisable: true,
               height: 788,                 // 에디터 높이
               focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
               lang: "ko-KR",					// 한글 설정
-              placeholder: '내용',
-                  disableResizeEditor: true,	// 크기 조절 기능 삭제
-                  toolbar: [
-                    ['fontname', ['fontname']],
-                    ['fontsize', ['fontsize']],
-                    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-                    ['color', ['forecolor','color']],
-                    ['table', ['table']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']],
-                    ['insert',['picture','link','video']],
-                    ['view', ['fullscreen', 'help']]
-                  ],
-                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-                fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-                })
+              placeholder: '내용 입력',
+              disableResizeEditor: true,	// 크기 조절 기능 삭제
+              toolbar: [
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+                ['insert',['hr']],
+                ['color', ['forecolor','color']],
+                ['table', ['table']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert',['picture','link','video']],
+                ['view', ['fullscreen', 'help']],
+                ['misc', ['codeview', 'undo', 'redo']],
+                ['customButtons', ['testBtn']]
+              ],
+              buttons: {
+                testBtn: customButton
+              },
+              callbacks: {
+                onImageUpload : function(files, modules, editable) {
+                  sendFile(files, modules, editable);
+                }
+              },
+              fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+              fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+              })
           });
+          function sendFile(files, modules, editable) {
+            for(var i=0; i < files.length; i++){
+              (function(i) {
+                var data = new FormData();
+                data.append("file", files[i]);
+                $.ajax({
+                  data : data,
+                  type : "POST",
+                  url : "/imageUpload",
+                  enctype: 'multipart/form-data',
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                  success : function(data) {
+                    $('#summernote').summernote('insertImage', data.url);
+                  }
+                });
+              })(i);
+            }
+          }
+          
+
+          function customButton(context) {
+            const ui = $.summernote.ui;
+            const button = ui.button({
+              contents: '<i class="note-icon-magic"></i> Box',
+              tooltip: 'Create Box',
+              container: '.note-editor',
+              className: 'note-btn',
+              click: function() {
+                context.invoke('editor.pasteHTML', '\
+                <div class="card">\
+  <div class="card-header">\
+    <span class="badge badge-secondary float-right" data-clipboard-target="#copied">Copyit</span>\
+    </div>\
+  <div class="card-body" id="copied">\
+    <div class="card-text">\
+      내용입력\
+      </div>\
+  </div>\
+  <script>\
+          var clipboard = new ClipboardJS(".badge");\
+            clipboard.on( "success", function() {\
+            alert( "코드가 복사되었습니다." );\
+          } );\
+          <\/script>\
+</div>\
+<br>');
+              }
+            });
+            return button.render();
+          }
+
       </script>
 
     </div>

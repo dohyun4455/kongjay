@@ -1,10 +1,22 @@
+img {
+  max-width: 100%;
+  height: auto !important;
+}
 
 body {
   font-family: 'Open Sans', sans-serif;
   margin-top:0px;
 }
 .card {
+  margin-top: 20px;
   margin-bottom: 50px;
+}
+.card-title {
+  margin-top: 10px;
+  vertical-align: middle;
+}
+.custom-card {
+  max-width: 100%;
 }
 .breadcrumb-item {
   font-size: 0.8em !important;
@@ -25,6 +37,7 @@ body {
 }
 
 .board-table .title{
+  width: 100%;
   text-align: center;
 }
 .board-table .numId,

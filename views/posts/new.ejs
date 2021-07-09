@@ -2,12 +2,12 @@
 <html>
   <head>
     <%- include('../partials/head') %>
+
   </head>
   <body>
     <%- include('../partials/nav') %>
 
     <div class="container mb-3">
-
       <form action="/posts<%= getPostQueryString() %>" method="post">
         <div class="input-group mb-3">
           <select id="category" name="category" class="custom-select col-1">
@@ -47,6 +47,7 @@
         $(document).ready(function() {
 	//여기 아래 부분
           $('#summernote').summernote({
+              tabDisable: true,
               height: 788,                 // 에디터 높이
               focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
               lang: "ko-KR",					// 한글 설정
@@ -56,19 +57,25 @@
                 ['fontname', ['fontname']],
                 ['fontsize', ['fontsize']],
                 ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+                ['insert',['hr']],
                 ['color', ['forecolor','color']],
                 ['table', ['table']],
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['height', ['height']],
                 ['insert',['picture','link','video']],
-                ['view', ['fullscreen', 'help']]
+                ['view', ['fullscreen', 'help']],
+                ['misc', ['codeview', 'undo', 'redo']],
+                ['customButtons', ['testBtn']]
               ],
+              buttons: {
+                testBtn: customButton
+              },
               callbacks: {
                 onImageUpload : function(files, modules, editable) {
                   sendFile(files, modules, editable);
                 }
               },
-              fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+              fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
               fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
               })
           });
@@ -92,6 +99,39 @@
               })(i);
             }
           }
+          
+
+          function customButton(context) {
+            const ui = $.summernote.ui;
+            const button = ui.button({
+              contents: '<i class="note-icon-magic"></i> Box',
+              tooltip: 'Create Box',
+              container: '.note-editor',
+              className: 'note-btn',
+              click: function() {
+                context.invoke('editor.pasteHTML', '\
+                <div class="card">\
+  <div class="card-header">\
+    <span class="badge badge-secondary float-right" data-clipboard-target="#copied">Copyit</span>\
+    </div>\
+  <div class="card-body" id="copied">\
+    <div class="card-text">\
+      내용입력\
+      </div>\
+  </div>\
+  <script>\
+          var clipboard = new ClipboardJS(".badge");\
+            clipboard.on( "success", function() {\
+            alert( "코드가 복사되었습니다." );\
+          } );\
+          <\/script>\
+</div>\
+<br>');
+              }
+            });
+            return button.render();
+          }
+
       </script>
 
     </div>

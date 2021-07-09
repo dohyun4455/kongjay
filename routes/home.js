@@ -15,6 +15,7 @@ var storage = multer.diskStorage({
 })
 var upload = multer({ storage: storage })
 router.post('/imageUpload', upload.any(), function(req, res){
+  //res.send({'url': 'https://kongjay.com/uploads/'+req.files[0].filename});
   res.send({'url': 'http://localhost/uploads/'+req.files[0].filename});
 });
 
