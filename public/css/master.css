@@ -3,11 +3,22 @@ img {
   height: auto !important;
 }
 
+
 body {
   font-family: 'Open Sans', sans-serif;
   margin-top:0px;
+  max-width: 100%;
   background-color: #FCE0E5;
 }
+
+@media screen and (max-width: 767px) {
+  #mdDate { display: none; } 
+  #mdCategory { display: none; } 
+  #mdTitle { display: none; } 
+ }
+ @media screen and (min-width: 767px) {
+  #mdHome { display: none; }
+ }
 .card {
   margin-top: 20px;
   margin-bottom: 50px;
@@ -70,7 +81,6 @@ body {
   word-break: break-all;
   white-space: pre-line;
   vertical-align: middle;
-  text-decoration: underline;
 }
 
 .post-body,
