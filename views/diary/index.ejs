@@ -27,7 +27,7 @@
                 <div class="card-body px-3">
                   <h5 class="card-title"><%= time %></h5>
                   <div class="modal-footer"></div>
-                  <textarea id="diarybody" class="form-control" style="height: 5em;"></textarea>
+                  <textarea id="diarybody" class="form-control" style="height: 5em;"> </textarea>
                   <div class="modal-body ">
                     <form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
                       <input type="file" id="FILE_TAG" name="FILE_TAG">
@@ -122,7 +122,12 @@
           processData: false,
           success:function(response) {
                alert("포스팅 성공!");
-               sendBody();
+               if(response.url) {
+                sendBody(response.url);
+               } else {
+                 sendBody("none");
+               }
+               
            },
            error: function (jqXHR) 
            { 
@@ -131,12 +136,8 @@
         });
       }
 
-      function sendBody() {
-        try {
-          var title = "/uploads/" + $("#FILE_TAG")[0].files[0].name;
-        } catch {
-          var title = "none";
-        }
+      function sendBody(url) {
+        var title = url;
         var formData = {
           title : title,
           body : $("#diarybody").val()
