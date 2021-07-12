@@ -63,14 +63,14 @@ router.get('/', async function(req, res){
 });
 
 // New
-router.get('/new', util.isLoggedin,checkPermission2, function(req, res){
+router.get('/new', util.isAdmin,checkPermission2, function(req, res){
   var post = req.flash('post')[0] || {};
   var errors = req.flash('errors')[0] || {};
   res.render('posts/new', { post:post, errors:errors });
 });
 
 // create
-router.post('/', util.isLoggedin, function(req, res){
+router.post('/', util.isAdmin, function(req, res){
   req.body.author = req.user._id;
   Post.create(req.body, function(err, post){
     if(err){
@@ -88,8 +88,8 @@ router.get('/:id', function(req, res){
   var commentError = req.flash('commentError')[0] || { _id:null, parentComment: null, errors:{} };
 
   Promise.all([
-      Post.findOne({_id:req.params.id}).populate({ path: 'author', select: 'username' }),
-      Comment.find({post:req.params.id}).sort('createdAt').populate({ path: 'author', select: 'username' })
+      Post.findOne({_id:req.params.id}).populate({ path: 'author', select: 'name' }),
+      Comment.find({post:req.params.id}).sort('createdAt').populate({ path: 'author', select: 'name' })
     ])
     .then(([post, comments]) => {
       post.views++;
@@ -104,7 +104,7 @@ router.get('/:id', function(req, res){
 });
 
 // edit
-router.get('/:id/edit', util.isLoggedin, checkPermission, function(req, res){
+router.get('/:id/edit', util.isAdmin, checkPermission, function(req, res){
   var post = req.flash('post')[0];
   var errors = req.flash('errors')[0] || {};
   if(!post){
@@ -120,7 +120,7 @@ router.get('/:id/edit', util.isLoggedin, checkPermission, function(req, res){
 });
 
 // update
-router.put('/:id', util.isLoggedin, checkPermission, function(req, res){
+router.put('/:id', util.isAdmin, checkPermission, function(req, res){
   req.body.updatedAt = Date.now();
   Post.findOneAndUpdate({_id:req.params.id}, req.body, {runValidators:true}, function(err, post){
     if(err){
@@ -133,7 +133,7 @@ router.put('/:id', util.isLoggedin, checkPermission, function(req, res){
 });
 
 // destroy
-router.delete('/:id', util.isLoggedin, checkPermission, function(req, res){
+router.delete('/:id', util.isAdmin, checkPermission, function(req, res){
   Post.deleteOne({_id:req.params.id}, function(err){
     if(err) return res.json(err);
     res.redirect('/posts'+res.locals.getPostQueryString());

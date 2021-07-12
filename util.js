@@ -9,7 +9,7 @@ util.parseError = function(errors){
     }
   }
   else if(errors.code == '11000' && errors.errmsg.indexOf('username') > 0) {
-    parsed.username = { message:'This username already exists!' };
+    parsed.username = { message:'이미 사용중인 이름 입니다.' };
   }
   else {
     parsed.unhandled = JSON.stringify(errors);
@@ -22,13 +22,22 @@ util.isLoggedin = function(req, res, next){
     next();
   }
   else {
-    req.flash('errors', {login:'Please login first'});
+    req.flash('errors', {login:'로그인이 필요합니다.'});
+    res.redirect('/login');
+  }
+}
+
+util.isAdmin = function(req, res, next) {
+  if(req.user.id == "60e3c47a7ea3eab848d1b634" || req.user.id == "60e552f90b9b211c71a3b637" ){
+    next();
+  } else {
+    req.flash('errors', {login:'관리자 계정으로 로그인 하십시오.'});
     res.redirect('/login');
   }
 }
 
 util.noPermission = function(req, res){
-  req.flash('errors', {login:"You don't have permission"});
+  req.flash('errors', {login:"권한이 없습니다."});
   req.logout();
   res.redirect('/login');
 }

@@ -8,12 +8,12 @@
 
     <div class="container mb-3">
 
-      <h3 class="contentBoxTop mb-3">New User</h3>
+      <h1 class="contentBoxTop mb-3" style="color: white;">신규회원</h1>
 
       <form action="/users" method="post">
 
         <div class="form-group row">
-          <label for="username" class="col-sm-3 col-form-label">Username*</label>
+          <label for="username" class="col-sm-3 col-form-label">ID*</label>
           <div class="col-sm-9">
             <input type="text" id="username" name="username" value="<%= user.username %>" class="form-control <%= (errors.username)?'is-invalid':'' %>">
             <% if(errors.username){ %>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="name" class="col-sm-3 col-form-label">Name*</label>
+          <label for="name" class="col-sm-3 col-form-label">이름*</label>
           <div class="col-sm-9">
             <input type="text" id="name" name="name" value="<%= user.name %>" class="form-control <%= (errors.name)?'is-invalid':'' %>">
             <% if(errors.name){ %>
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="email" class="col-sm-3 col-form-label">Email</label>
+          <label for="email" class="col-sm-3 col-form-label">이메일</label>
           <div class="col-sm-9">
             <input type="text" id="email" name="email" value="<%= user.email %>" class="form-control <%= (errors.email)?'is-invalid':'' %>">
             <% if(errors.email){ %>
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="password" class="col-sm-3 col-form-label">Password*</label>
+          <label for="password" class="col-sm-3 col-form-label">패스워드*</label>
           <div class="col-sm-9">
             <input type="password" id="password" name="password" value="" class="form-control <%= (errors.password)?'is-invalid':'' %>">
             <% if(errors.password){ %>
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="passwordConfirmation" class="col-sm-3 col-form-label">Password Confirmation*</label>
+          <label for="passwordConfirmation" class="col-sm-3 col-form-label">패스워드 재입력*</label>
           <div class="col-sm-9 col-sm-offset-3">
             <input type="password" id="passwordConfirmation" name="passwordConfirmation" value="" class="form-control <%= (errors.passwordConfirmation)?'is-invalid':'' %>">
             <% if(errors.passwordConfirmation){ %>
@@ -58,7 +58,7 @@
           </div>
         </div>
         <p>
-          <small>*Required</small>
+          <small style="color: red;">*필수 입력!</small>
         </p>
 
         <% if(errors.unhandled){ %>
@@ -75,4 +75,9 @@
 
     </div>
   </body>
+  <script>
+    $(window).on('load', function () {
+        $('body').sakura();
+    });
+  </script>
 </html>

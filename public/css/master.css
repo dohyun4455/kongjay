@@ -3,7 +3,6 @@ img {
   height: auto !important;
 }
 
-
 body {
   font-family: 'Open Sans', sans-serif;
   margin-top:0px;
@@ -19,10 +18,6 @@ body {
  @media screen and (min-width: 767px) {
   #mdHome { display: none; }
  }
-.card {
-  margin-top: 20px;
-  margin-bottom: 50px;
-}
 .card-title {
   margin-top: 10px;
   vertical-align: middle;

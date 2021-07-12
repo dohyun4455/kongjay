@@ -24,8 +24,8 @@ router.post('/imageUpload', upload.any(), function(req, res){
 router.get('/', function(req, res){
   res.render('home/welcome');
 });
-router.get('/about', function(req, res){
-  res.render('home/about');
+router.get('/info', function(req, res){
+  res.render('home/info');
 });
 
 router.get('/errorpage', function(req, res){

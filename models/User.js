@@ -6,7 +6,7 @@ var userSchema = mongoose.Schema({
   username:{
     type:String,
     required:[true,'Username is required!'],
-    match:[/^.{4,12}$/,'Should be 4-12 characters!'],
+    match:[/^.{2,12}$/,'최소 2글자 이상의 입력이 필요합니다.'],
     trim:true,
     unique:true
   },
@@ -18,12 +18,12 @@ var userSchema = mongoose.Schema({
   name:{
     type:String,
     required:[true,'Name is required!'],
-    match:[/^.{2,12}$/,'Should be 2-12 characters!'],
+    match:[/^.{2,12}$/,'최소 2글자 이상의 입력이 필요합니다.'],
     trim:true
   },
   email:{
     type:String,
-    match:[/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,'Should be a vaild email address!'],
+    match:[/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,'올바른 이메일 주소를 입력해주세요.'],
     trim:true
   }
 },{
