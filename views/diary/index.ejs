@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="/css/diarystyle.css" type="text/css" />
         
     </head>
-    <body>
+    <body style="overflow-x:hidden">
       <%- include('../partials/nav') %>
         <nav class="navbar navbar-light sticky-top bg-light">
         <a class="navbar-brand" href="/diary"><i class="fab fa-instagram"></i> KongJgram</a>
@@ -54,7 +54,6 @@
                     <p class="card-text"><%= diary.body %></p>
                     <% if(isAdminLoggedin){ %>
                       <button type="button" onclick="javascript:deleteDiary('<%= diary._id %>')" class="btn btn-danger btn-sm">삭제</button>
-                      <p id="deleteid" value="<%= diary._id %>" style="display: none;"></p>
                     <% } %>
                 </div>
               </div>
