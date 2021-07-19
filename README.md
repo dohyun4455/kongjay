@@ -1,5 +1,5 @@
 # kongjay
-node.js express mongoDB EJS JQUERY bootstrap4.x
+node.js express mongoDB EJS JQUERY bootstrap4.0
 
 - Requirements
 ```
@@ -7,8 +7,16 @@ node.js express mongoDB EJS JQUERY bootstrap4.x
  node index.js
 ```
 
-- 
+- Open Source Scripts
 ```
  Summernote
- Sakura
- clip
+ jquery-sakura
+ clipboard
+```
+
+- Security Vulnerability
+```
+ XSS -> HTML Tags not filterd
+ Injection -> SQL Query not filterd
+```
+ 
